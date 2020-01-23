@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Alert} from 'react-native';
-import { Button, Input, Text,Layout} from '@ui-kitten/components';
+import { StyleSheet, View, Alert,ImageBackground} from 'react-native';
+import { Button, Input, Text} from '@ui-kitten/components';
 import {loginUrl} from '../urls/urlgenerator'
 import * as SecureStore from 'expo-secure-store';
 
@@ -43,16 +43,18 @@ export default class LoginScreen extends React.Component{
   }
   render(){
     return (
-      <Layout style={{width: '100%', height: '100%',flex: 1}}>
+      <ImageBackground source={{uri: 'http://i.imgur.com/IGlBYaC.jpg'}} style={styles.backgroundImage} >
             <View style={styles.headerContainer}>
               <Text
                 category='h1'
+                status = 'control'
                 >
                 COLLCONN
               </Text>
               <Text
                 style={styles.LogInLabel}
                 category='s1'
+                status = 'control'
                 >
                 Log in to your account
               </Text>
@@ -76,6 +78,7 @@ export default class LoginScreen extends React.Component{
                   style={styles.forgotPasswordButton}
                   appearance='ghost'
                   onPress = {()=>{this.props.navigation.navigate('ForgotPassword')}}
+                  status = 'control'
                 >
                     Forgot your password?
                 </Button>
@@ -85,10 +88,11 @@ export default class LoginScreen extends React.Component{
               style={styles.LogInButton}
               size='giant'
               onPress = {this.login}
+              status = 'danger'
               >
               LOGIN
             </Button>
-        </Layout>
+        </ImageBackground>
       );
   }
 };
@@ -126,5 +130,10 @@ const styles = StyleSheet.create({
   text: {
     margin: 8,
     textAlign:'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
   },
 });

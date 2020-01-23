@@ -1,22 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, Alert} from 'react-native';
-import { Button, Input, Text,Layout} from '@ui-kitten/components';
+import { StyleSheet, View,ImageBackground} from 'react-native';
+import { Button, Input, Text} from '@ui-kitten/components';
 
 
 export default class ForgotPasswordScreen extends React.Component{
 
   render(){
     return (
-      <Layout style={{width: '100%', height: '100%',flex: 1}}>
+      <ImageBackground source={{uri: 'http://i.imgur.com/IGlBYaC.jpg'}} style={styles.backgroundImage} >
             <View style={styles.headerContainer}>
               <Text
                 category='h1'
+                status = 'control'
                 >
                 Forgot Password
               </Text>
               <Text
                 style={styles.ForgotLabel}
                 category='s1'
+                status = 'control'
                 >
                 Enter your UserId
               </Text>
@@ -29,10 +31,11 @@ export default class ForgotPasswordScreen extends React.Component{
             <Button
               style={styles.ForgotButton}
               size='giant'
+              status = 'danger'
               >
               Submit
             </Button>
-        </Layout>
+        </ImageBackground>
       );
   }
 };
@@ -56,5 +59,10 @@ const styles = StyleSheet.create({
   },
   ForgotButton: {
     marginHorizontal: 16,
+  },
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
   },
 });
