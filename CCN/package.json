@@ -23,7 +23,8 @@
     "react-native-svg": "^11.0.1",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.0.10",
-    "react-navigation-stack": "^2.0.15"
+    "react-navigation-stack": "^2.0.15",
+    "expo-secure-store": "~8.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",

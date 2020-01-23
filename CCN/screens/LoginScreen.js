@@ -1,9 +1,46 @@
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet, View, Alert} from 'react-native';
 import { Button, Input, Text,Layout} from '@ui-kitten/components';
+import {loginUrl} from '../urls/urlgenerator'
+import * as SecureStore from 'expo-secure-store';
+
 
 export default class LoginScreen extends React.Component{
-
+  state = {
+    username:'',
+    password:'',
+    status: '',
+  };
+  login = async ()=>{
+    try{
+      let formData = new FormData();
+      formData.append('id',this.state.username);
+      formData.append('pwd', this.state.password);
+      var resp = await fetch(loginUrl(),
+        {
+            body: formData,
+            method: "post"
+        });
+        switch(resp.status){
+          case 200:
+              resp = await resp.json();
+              await SecureStore.deleteItemAsync('auth');
+              await SecureStore.setItemAsync('auth', resp['auth']);
+              Alert.alert('Logged In!');
+              break;
+          case 400:
+          case 401:
+              this.setState({status:'Invalid Username or Password!'});
+              break;
+          default:
+               Alert.alert('OOPSY!Please try Again');
+               break;
+        }
+    }
+    catch(ex){
+      console.log(''+ex);
+    }
+  }
   render(){
     return (
       <Layout style={{width: '100%', height: '100%',flex: 1}}>
@@ -14,7 +51,7 @@ export default class LoginScreen extends React.Component{
                 COLLCONN
               </Text>
               <Text
-                style={styles.signInLabel}
+                style={styles.LogInLabel}
                 category='s1'
                 >
                 Log in to your account
@@ -23,26 +60,33 @@ export default class LoginScreen extends React.Component{
             <View style={styles.formContainer}>
               <Input
                 placeholder='UserId'
+                value = {this.state.username}
+                onChangeText={(text) => this.setState({username:text})}
               />
               <Input
                 style={styles.passwordInput}
                 placeholder='Password'
                 secureTextEntry={true}
+                value = {this.state.password}
+                onChangeText={(text) => this.setState({password:text})}
               />
             </View>
             <View style={styles.forgotPasswordContainer}>
                 <Button
                   style={styles.forgotPasswordButton}
                   appearance='ghost'
+                  onPress = {()=>{this.props.navigation.navigate('ForgotPassword')}}
                 >
                     Forgot your password?
                 </Button>
             </View>
+            <Text style={styles.text} status='danger'>{this.state.status}</Text>
             <Button
-              style={styles.signInButton}
+              style={styles.LogInButton}
               size='giant'
+              onPress = {this.login}
               >
-              SIGN IN
+              LOGIN
             </Button>
         </Layout>
       );
@@ -62,14 +106,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 16,
   },
-  signInLabel: {
+  LogInLabel: {
     marginTop: 16,
   },
-  signInButton: {
-    marginHorizontal: 16,
-  },
-  signUpButton: {
-    marginVertical: 12,
+  LogInButton: {
     marginHorizontal: 16,
   },
   forgotPasswordContainer: {
@@ -82,5 +122,9 @@ const styles = StyleSheet.create({
   },
   forgotPasswordButton: {
     paddingHorizontal: 0,
+  },
+  text: {
+    margin: 8,
+    textAlign:'center',
   },
 });
