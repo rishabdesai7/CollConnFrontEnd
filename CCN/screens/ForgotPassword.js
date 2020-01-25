@@ -7,7 +7,7 @@ export default class ForgotPasswordScreen extends React.Component{
 
   render(){
     return (
-      <ImageBackground source={{uri: 'http://i.imgur.com/IGlBYaC.jpg'}} style={styles.backgroundImage} >
+      <ImageBackground source={require('../assets/images/back.png')} style={styles.backgroundImage} >
             <View style={styles.headerContainer}>
               <Text
                 category='h1'
