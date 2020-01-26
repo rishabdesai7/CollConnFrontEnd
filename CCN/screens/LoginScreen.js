@@ -3,6 +3,11 @@ import { StyleSheet, View, Alert,ImageBackground} from 'react-native';
 import { Button, Input, Text} from '@ui-kitten/components';
 import {loginUrl} from '../urls/urlgenerator'
 import * as SecureStore from 'expo-secure-store';
+import {
+  EmailIconFill,
+  EyeOffIconFill,
+  EyeOnIconFill,
+} from '../assets/icons/index';
 
 
 export default class LoginScreen extends React.Component{
@@ -10,7 +15,12 @@ export default class LoginScreen extends React.Component{
     username:'',
     password:'',
     status: '',
+    icon:EyeOffIconFill,
+    visibility:true,
   };
+  toggleVisibility = ()=>{
+    this.state.visibility?this.setState({icon:EyeOnIconFill,visibility:false}):this.setState({icon:EyeOffIconFill,visibility:true});
+  }
   login = async ()=>{
     try{
       let formData = new FormData();
@@ -64,13 +74,16 @@ export default class LoginScreen extends React.Component{
                 placeholder='UserId'
                 value = {this.state.username}
                 onChangeText={(text) => this.setState({username:text})}
+                icon = {EmailIconFill}
               />
               <Input
                 style={styles.passwordInput}
                 placeholder='Password'
-                secureTextEntry={true}
+                secureTextEntry={this.state.visibility}
                 value = {this.state.password}
                 onChangeText={(text) => this.setState({password:text})}
+                icon = {this.state.icon}
+                onIconPress = {this.toggleVisibility}
               />
             </View>
             <View style={styles.forgotPasswordContainer}>
