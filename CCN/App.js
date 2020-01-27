@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet} from 'react-native';
-import {AppContainer} from './navigation/AppNavigation'
-import { ApplicationProvider, IconRegistry} from '@ui-kitten/components';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import {AppContainer} from './src/navigation/AppNavigation';
+import { ApplicationProvider} from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 
 export default function App() {
