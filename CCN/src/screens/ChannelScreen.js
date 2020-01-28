@@ -20,14 +20,11 @@ export default class ChannelScreen extends React.Component{
         <Button appearance='ghost' status='danger' icon={HeartIconFill} onPress={this._signOutAsync}/>
     );
     renderItem = ({ item, index }) => (
-        <ListItem
-          title={`${item.title} ${index + 1}`}
-          description={`${item.description} ${index + 1}`}
-          style = {{margin:10,}}
-          icon={HeartIconFill}
-          accessory={this.renderItemAccessory}
-        >
-        </ListItem>
+        <Post
+          header={`${item.title} ${index + 1}`}
+          text={`${item.description} ${index + 1}`}
+          style = {{margin:10}}
+        />
       );
     render(){
         return(
