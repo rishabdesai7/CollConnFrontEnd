@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet} from 'react-native';
-import {AppContainer} from './src/navigation/AppNavigation';
+import {MainScreen} from './src/navigation/AppNavigation';
 import { ApplicationProvider} from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 
 export default function App() {
   return (
     <ApplicationProvider mapping={mapping} theme={lightTheme}>
-      <AppContainer/>
+      <MainScreen/>
     </ApplicationProvider>
   );
 }

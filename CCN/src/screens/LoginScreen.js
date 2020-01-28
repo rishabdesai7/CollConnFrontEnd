@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Alert,ImageBackground} from 'react-native';
+import { StyleSheet, View, Alert,ImageBackground,AsyncStorage} from 'react-native';
 import { Button, Input, Text} from '@ui-kitten/components';
 import {loginUrl} from '../urls/urlgenerator'
 import * as SecureStore from 'expo-secure-store';
@@ -36,7 +36,8 @@ export default class LoginScreen extends React.Component{
               resp = await resp.json();
               await SecureStore.deleteItemAsync('auth');
               await SecureStore.setItemAsync('auth', resp['auth']);
-              Alert.alert('Logged In!');
+              await AsyncStorage.setItem('userToken', 'abc');
+              this.props.navigation.navigate('App');
               break;
           case 400:
           case 401:
