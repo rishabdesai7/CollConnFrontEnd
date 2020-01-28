@@ -31,7 +31,7 @@ export default class ChannelScreen extends React.Component{
             <Layout>
                 <TopNavigation
                     title='<channel Name>'
-                    alignment='start'
+                    alignment='center'
                 />
                 <List
                     data={this.data}
@@ -41,45 +41,3 @@ export default class ChannelScreen extends React.Component{
         );
     }
 }
-const styles = StyleSheet.create({
-    headerContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 32,
-      minHeight: 150,
-      width:'100%',
-      height:'100%',
-    },
-    formContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: 16,
-    },
-    LogInLabel: {
-      marginTop: 16,
-    },
-    LogInButton: {
-      marginHorizontal: 16,
-    },
-    forgotPasswordContainer: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      marginBottom:200,
-    },
-    passwordInput: {
-      marginTop: 16,
-    },
-    forgotPasswordButton: {
-      paddingHorizontal: 0,
-    },
-    text: {
-      margin: 8,
-      textAlign:'center',
-    },
-    backgroundImage: {
-      flex: 1,
-      width: null,
-      height: null,
-    },
-  });
-  
