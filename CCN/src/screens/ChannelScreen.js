@@ -50,7 +50,7 @@ export default class ChannelScreen extends React.Component{
         </OverflowMenu>
       );
       renderAddAction = () => (
-          <TopNavigationAction icon={PlusIconFill}/>
+          <TopNavigationAction icon={PlusIconFill} onPress={()=>{this.props.navigation.navigate('AddPost')}}/>
       );
     renderRightControls = ()=>{
       MenuAction = this.renderMenuAction();
