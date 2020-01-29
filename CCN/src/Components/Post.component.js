@@ -44,21 +44,13 @@ class CardCustomHeaderShowcase extends React.Component{
                     <Text>
                     {this.props.text}
                     </Text>
-                    <View style={{flex: 1, flexDirection: 'row',justifyContent: 'space-between'}} >
-                        <Button 
-                            style={styles.button} 
-                            appearance='ghost' status='danger' 
-                            icon={this.state.likeIcon}>
-                            Like
-                        </Button>
-                        <Button 
-                           style={styles.button} 
-                           appearance='ghost' 
-                           status='danger' 
-                           icon={this.state.commentIcon}>
-                           comment
-                        </Button>
-                    </View>
+                    <Button 
+                      style={styles.button} 
+                      appearance='ghost' 
+                      status='danger' 
+                      icon={this.state.commentIcon}>
+                      comment
+                    </Button>
                 </Card>
               </View>
           );

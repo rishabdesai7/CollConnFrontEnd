@@ -1,16 +1,8 @@
 import React from 'react';
-import { Layout,TopNavigation,List,ListItem,Button} from '@ui-kitten/components';
-import { StyleSheet,AsyncStorage} from 'react-native';
+import { Layout,TopNavigation,List,Button,ButtonGroup} from '@ui-kitten/components';
 import {HeartIconFill} from '../assets/icons/index'
 import Post from '../Components/Post.component';
 export default class ChannelScreen extends React.Component{
-    /*temp */
-    _signOutAsync = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('Auth');
-      };
-
-    /**/
 
     data = new Array(10).fill({
         title: 'Title for Item',
@@ -32,11 +24,12 @@ export default class ChannelScreen extends React.Component{
                 <TopNavigation
                     title='<channel Name>'
                     alignment='center'
-                />
-                <List
-                    data={this.data}
-                    renderItem={this.renderItem}
-                />
+                    style ={{marginTop:25}}
+                  />
+                    <List
+                        data={this.data}
+                        renderItem={this.renderItem}
+                    />
             </Layout>
         );
     }
