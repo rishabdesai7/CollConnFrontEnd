@@ -48,6 +48,7 @@ class CardCustomHeaderShowcase extends React.Component{
                       style={styles.button} 
                       appearance='ghost' 
                       status='danger' 
+                      onPress = {this.props.commentAction}
                       icon={this.state.commentIcon}>
                       comment
                     </Button>
@@ -62,6 +63,7 @@ export default class Post extends React.Component{
             <CardCustomHeaderShowcase
                 text = {this.props.text}
                 header = {this.props.header}
+                commentAction = {this.props.commentAction}
             />
         );
     }

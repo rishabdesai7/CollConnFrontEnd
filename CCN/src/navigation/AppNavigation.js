@@ -4,6 +4,7 @@ import ConversationScreen from '../screens/ConversionScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ForgotPasswordScreen from '../screens/ForgotPassword';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
+import CommentScreen from '../screens/CommentScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
@@ -18,6 +19,7 @@ const AuthNavigator = createStackNavigator({
 
 const ChannelNavigator = createStackNavigator({
   Channel: ChannelScreen,
+  Comment : CommentScreen,
 }, {
   headerMode: 'none',
 });

@@ -64,6 +64,7 @@ export default class ChannelScreen extends React.Component{
           header={`${item.title} ${index + 1}`}
           text={`${item.description} ${index + 1}`}
           style = {{margin:10}}
+          commentAction = {()=>{this.props.navigation.navigate('Comment')}}
         />
       );
     render(){
@@ -80,6 +81,7 @@ export default class ChannelScreen extends React.Component{
                     <List
                         data={this.data}
                         renderItem={this.renderItem}
+                        style = {{marginBottom:80}}
                     />
             </Layout>
         );
