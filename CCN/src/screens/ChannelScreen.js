@@ -1,6 +1,7 @@
 import React from 'react';
+import {View} from 'react-native';
 import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
-import {HeartIconFill,MoreVerticalIconFill,PlusIconFill,} from '../assets/icons/index'
+import {HeartIconFill,MoreVerticalIconFill,BellIconOutline,AssignIconFill,PersonAddIconFill} from '../assets/icons/index'
 import Post from '../Components/Post.component';
 export default class ChannelScreen extends React.Component{
 
@@ -49,12 +50,20 @@ export default class ChannelScreen extends React.Component{
           />
         </OverflowMenu>
       );
-      renderAddAction = () => (
-          <TopNavigationAction icon={PlusIconFill} onPress={()=>{this.props.navigation.navigate('AddPost')}}/>
-      );
+    renderAddAction = () => (
+      <TopNavigationAction icon={PersonAddIconFill}/>
+      //<View></View>
+    );
+    renderPostAction = () => (
+      <TopNavigationAction icon={AssignIconFill} onPress={()=>{this.props.navigation.navigate('AddPost')}}/>
+      //<View></View>
+    );
+    renderNotificationAction = () => (
+      <TopNavigationAction icon={BellIconOutline}/>
+      //<View></View>
+    );
     renderRightControls = ()=>{
-      MenuAction = this.renderMenuAction();
-      return [MenuAction];
+      return [this.renderAddAction(),this.renderPostAction(),this.renderNotificationAction()];
     }
     renderItemAccessory = (style) => (
         <Button appearance='ghost' status='danger' icon={HeartIconFill} onPress={this._signOutAsync}/>
@@ -72,9 +81,9 @@ export default class ChannelScreen extends React.Component{
             <Layout>
                 <TopNavigation
                     title= {this.state.channel}
-                    alignment='center'
+                    alignment = 'center'
                     rightControls={this.renderRightControls()}
-                    leftControl = {this.renderAddAction()}
+                    leftControl = {this.renderMenuAction()}
                     style ={{marginTop:25}}
                     titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40}}
                   />

@@ -837,6 +837,27 @@ export const HardwareIconFill = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const BellIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/bell-outline.png'),
+  };
+  return Icon(source, style);
+};
+
+export const AttachIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/attach-outline.png'),
+  };
+  return Icon(source, style);
+};
+
+export const ImageIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/image-outline.png'),
+  };
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

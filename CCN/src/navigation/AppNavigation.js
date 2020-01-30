@@ -6,6 +6,7 @@ import ForgotPasswordScreen from '../screens/ForgotPassword';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import CommentScreen from '../screens/CommentScreen';
 import AddPostScreen from '../screens/AddPostScreen';
+import CreateChannelScreen from '../screens/CreateChannelScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
@@ -26,11 +27,17 @@ const ChannelNavigator = createStackNavigator({
   headerMode: 'none',
 });
 
+const ProfileNavigator = createStackNavigator({
+  Profile: ProfileScreen,
+  Create : CreateChannelScreen,
+}, {
+  headerMode: 'none',
+});
 
 const TabNavigator = createBottomTabNavigator({
   Channel: ChannelNavigator,
   Conversation:ConversationScreen,
-  Profile: ProfileScreen,
+  Profile: ProfileNavigator,
 }, {
   tabBarComponent: TabBarComponent,
 });
