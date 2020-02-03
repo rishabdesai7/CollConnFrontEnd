@@ -6,6 +6,8 @@ import ForgotPasswordScreen from '../screens/ForgotPassword';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import CommentScreen from '../screens/CommentScreen';
 import AddPostScreen from '../screens/AddPostScreen';
+import MenuScreen from '../screens/MenuScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import CreateChannelScreen from '../screens/CreateChannelScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -28,8 +30,10 @@ const ChannelNavigator = createStackNavigator({
 });
 
 const ProfileNavigator = createStackNavigator({
+  Menu:MenuScreen,
   Profile: ProfileScreen,
   Create : CreateChannelScreen,
+  Notification:NotificationScreen,
 }, {
   headerMode: 'none',
 });

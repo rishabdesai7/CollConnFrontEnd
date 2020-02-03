@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView } from 'react-navigation';
 import {BottomNavigation,BottomNavigationTab} from '@ui-kitten/components';
-import {PersonIconOutline,PaperPlaneIconFill,LayoutIconOutline} from '../assets/icons/index';
+import {PaperPlaneIconFill,LayoutIconOutline,MenuIconOutline} from '../assets/icons/index';
 
 export const TabBarComponent = ({ navigation }) => {
 
@@ -15,7 +15,7 @@ export const TabBarComponent = ({ navigation }) => {
         <BottomNavigation selectedIndex={navigation.state.index} onSelect={onSelect} style={{marginVertical: 8,}} >
           <BottomNavigationTab title='Channel' icon ={LayoutIconOutline}/>
           <BottomNavigationTab title='Conversation' icon ={PaperPlaneIconFill}/>
-          <BottomNavigationTab title='Profile' icon= {PersonIconOutline}/>
+          <BottomNavigationTab title='Menu' icon= {MenuIconOutline}/>
         </BottomNavigation>
       </SafeAreaView>
     );

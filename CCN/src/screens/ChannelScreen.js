@@ -1,7 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
-import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
-import {HeartIconFill,MoreVerticalIconFill,BellIconOutline,AssignIconFill,PersonAddIconFill} from '../assets/icons/index'
+import {TouchableOpacity} from 'react-native';
+import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction,Input} from '@ui-kitten/components';
+import {HeartIconFill,MoreVerticalIconFill,BellIconOutline,PersonAddIconFill,AssignIconFill} from '../assets/icons/index'
 import Post from '../Components/Post.component';
 export default class ChannelScreen extends React.Component{
 
@@ -58,12 +58,8 @@ export default class ChannelScreen extends React.Component{
       <TopNavigationAction icon={AssignIconFill} onPress={()=>{this.props.navigation.navigate('AddPost')}}/>
       //<View></View>
     );
-    renderNotificationAction = () => (
-      <TopNavigationAction icon={BellIconOutline}/>
-      //<View></View>
-    );
     renderRightControls = ()=>{
-      return [this.renderAddAction(),this.renderPostAction(),this.renderNotificationAction()];
+      return [this.renderAddAction(),this.renderPostAction(),this.renderMenuAction()];
     }
     renderItemAccessory = (style) => (
         <Button appearance='ghost' status='danger' icon={HeartIconFill} onPress={this._signOutAsync}/>
@@ -81,17 +77,23 @@ export default class ChannelScreen extends React.Component{
             <Layout>
                 <TopNavigation
                     title= {this.state.channel}
-                    alignment = 'center'
                     rightControls={this.renderRightControls()}
-                    leftControl = {this.renderMenuAction()}
                     style ={{marginTop:25}}
-                    titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40}}
+                    titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40,marginHorizontal:30}}
                   />
-                    <List
-                        data={this.data}
-                        renderItem={this.renderItem}
-                        style = {{marginBottom:80}}
+                  <TouchableOpacity onPress =  {()=>{this.props.navigation.navigate('AddPost')}}>
+                    <Input
+                      style={{margin:10,borderRadius:80}}
+                      size='large'
+                      placeholder='whats on ur mind.......'
+                      disabled = {true}
                     />
+                  </TouchableOpacity>
+                  <List
+                    data={this.data}
+                    renderItem={this.renderItem}
+                    style = {{marginBottom:180}}
+                  />
             </Layout>
         );
     }

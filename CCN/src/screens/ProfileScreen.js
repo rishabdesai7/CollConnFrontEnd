@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet,View,ScrollView,AsyncStorage } from 'react-native';
-import { Button, Layout, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { StyleSheet,ScrollView,AsyncStorage } from 'react-native';
+import { Button, Layout, TopNavigation} from '@ui-kitten/components';
 import { ProfileAvatar } from '../Components/profile-avatar.component';
 import { ProfileSetting } from '../Components/profile-setting.component';
 import {CameraIconFill} from '../assets/icons/index'
@@ -58,10 +58,6 @@ export default class ProfileScreen extends React.Component{
                         hint='Phone Number'
                         value='{profile.phoneNumber}'
                     />
-                   <View style = {{flexDirection:'row',margin:24}}>
-                    <Button size = 'giant' style = {{flex:1,marginRight:5}} onPress = {()=>{this.props.navigation.navigate('Create')}}>Channel+</Button>
-                    <Button size='giant' style = {{flex:1,marginLeft:5}} onPress={this._signOutAsync}>Logout</Button>
-                    </View>
                     </ScrollView>
             </Layout>
         );

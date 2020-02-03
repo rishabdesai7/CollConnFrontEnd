@@ -858,6 +858,27 @@ export const ImageIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const AlertIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/alert-triangle-outline.png'),
+  };
+  return Icon(source, style);
+};
+
+export const MenuIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/menu-outline.png'),
+  };
+  return Icon(source, style);
+};
+
+export const LogoutIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/log-out-outline.png'),
+  };
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,
