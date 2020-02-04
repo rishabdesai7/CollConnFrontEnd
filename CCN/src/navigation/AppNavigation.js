@@ -1,6 +1,6 @@
 import LoginScreen from '../screens/LoginScreen';
 import ChannelScreen from '../screens/ChannelScreen';
-import ConversationScreen from '../screens/ConversionScreen';
+import ConversationScreen from '../screens/ConversationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ForgotPasswordScreen from '../screens/ForgotPassword';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
@@ -10,6 +10,7 @@ import MenuScreen from '../screens/MenuScreen';
 import ComplaintScreen from '../screens/ComplaintScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import CreateChannelScreen from '../screens/CreateChannelScreen';
+import MessageScreen from '../screens/MessageScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
@@ -40,9 +41,16 @@ const ProfileNavigator = createStackNavigator({
   headerMode: 'none',
 });
 
+const ConversationNavigator = createStackNavigator({
+  Conversation:ConversationScreen,
+  Message:MessageScreen,
+}, {
+  headerMode: 'none',
+});
+
 const TabNavigator = createBottomTabNavigator({
   Channel: ChannelNavigator,
-  Conversation:ConversationScreen,
+  Conversation:ConversationNavigator,
   Profile: ProfileNavigator,
 }, {
   tabBarComponent: TabBarComponent,
