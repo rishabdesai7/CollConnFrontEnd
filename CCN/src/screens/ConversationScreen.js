@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout,List,TopNavigation,Text,Divider} from '@ui-kitten/components';
+import {Layout,List,TopNavigation,Text,Divider,ListItem,Avatar} from '@ui-kitten/components';
 import {View,StyleSheet,TouchableOpacity} from 'react-native';
 import { ProfileAvatar } from '../Components/profile-avatar.component';
 export default class ConversationScreen extends React.Component{
@@ -7,7 +7,7 @@ export default class ConversationScreen extends React.Component{
         Username: 'Username',
         lastmsg: 'Description for Item',
       });
-    renderItem = ({ item, index }) =>(
+    /*renderItem = ({ item, index }) =>(
         <TouchableOpacity onPress= {()=>{this.props.navigation.navigate('Message')}}>
             <Layout style = {{flexDirection:'row', borderBottomColor: 'grey',borderBottomWidth: 0.2}}>
                 <ProfileAvatar
@@ -20,6 +20,22 @@ export default class ConversationScreen extends React.Component{
                 </View>
             </Layout>
         </TouchableOpacity>
+    );*/
+    renderProfileAvatar = () => (
+        <Avatar
+          style={styles.avatar}
+          source={require('../assets/images/profile.jpg')}
+        />
+      );
+    renderItem = ({ item, index }) => (
+        <ListItem
+            title={`${item.Username} ${index + 1}`}
+            description={`${item.lastmsg} ${index + 1}`}
+            icon = {this.renderProfileAvatar}
+            titleStyle ={{fontWeight:'bold'}}
+            style = {{borderBottomWidth: 1,borderBottomColor: '#f2f2f2',height:70}}
+            onPress= {()=>{this.props.navigation.navigate('Message')}}
+        />
     );
     render(){
         return(
@@ -33,6 +49,7 @@ export default class ConversationScreen extends React.Component{
                     <List
                         data={this.data}
                         renderItem={this.renderItem}
+                        style = {{backgroundColor:'white'}}
                     />
             </Layout>
 
@@ -52,6 +69,12 @@ const styles = StyleSheet.create({
     label: {
         alignSelf: 'center',
         flex:8,
+      },
+    avatar: {
+        width: 40,
+        height: 40,
+        marginLeft:2,
+        tintColor: null,
       },
 });
   
