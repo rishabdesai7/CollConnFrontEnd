@@ -81,18 +81,10 @@ export default class ChannelScreen extends React.Component{
                     style ={{marginTop:25}}
                     titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40,marginHorizontal:30}}
                   />
-                  <TouchableOpacity onPress =  {()=>{this.props.navigation.navigate('AddPost')}}>
-                    <Input
-                      style={{margin:10,borderRadius:80}}
-                      size='large'
-                      placeholder='whats on ur mind.......'
-                      disabled = {true}
-                    />
-                  </TouchableOpacity>
                   <List
                     data={this.data}
                     renderItem={this.renderItem}
-                    style = {{marginBottom:180}}
+                    style = {{marginBottom:100}}
                   />
             </Layout>
         );
