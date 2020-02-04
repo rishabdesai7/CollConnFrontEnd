@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View} from 'react-native';
 import { Button, Input, Text, Layout} from '@ui-kitten/components';
-import {ImageIconOutline,AttachIconOutline} from '../assets/icons/index';
+
 
 export default class CreateChannelScreen extends React.Component{
 
@@ -12,7 +12,7 @@ export default class CreateChannelScreen extends React.Component{
                 <Text
                     category='h1'
                     >
-                    CreateChannel
+                    Create Channel
                 </Text>
                 </View>
                 <View style={styles.formContainer}>

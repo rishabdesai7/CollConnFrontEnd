@@ -15,8 +15,8 @@ export default class MenuScreen extends React.Component{
             icon:PlusIconFill,
         },
         {
-            title: 'Complain',
-            onpress: ()=>{},
+            title: 'Report',
+            onpress: ()=>{this.props.navigation.navigate('Report')},
             icon:AlertIconOutline,
         },
         {

@@ -7,6 +7,7 @@ import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import CommentScreen from '../screens/CommentScreen';
 import AddPostScreen from '../screens/AddPostScreen';
 import MenuScreen from '../screens/MenuScreen';
+import ComplaintScreen from '../screens/ComplaintScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import CreateChannelScreen from '../screens/CreateChannelScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
@@ -34,6 +35,7 @@ const ProfileNavigator = createStackNavigator({
   Profile: ProfileScreen,
   Create : CreateChannelScreen,
   Notification:NotificationScreen,
+  Report:ComplaintScreen,
 }, {
   headerMode: 'none',
 });
