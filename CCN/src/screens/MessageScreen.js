@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout,List,TopNavigation,Input,Text,Button,Divider,TopNavigationAction,Avatar} from '@ui-kitten/components';
-import {View,StyleSheet,KeyboardAvoidingView} from 'react-native';
+import {View,StyleSheet,KeyboardAvoidingView,Keyboard} from 'react-native';
 import {sendIconFill} from '../assets/icons/index';
 export default class MessageScreen extends React.Component{
     state={
@@ -72,6 +72,7 @@ export default class MessageScreen extends React.Component{
               );
     } 
     sendPress = ()=>{
+        Keyboard.dismiss();
         var temp = this.state.data;
         var tempmsg ={
             msg:this.state.message,
