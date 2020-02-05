@@ -43,7 +43,7 @@ export default class MenuScreen extends React.Component{
         return(
             <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15}}>
                 <TouchableOpacity onPress =  {()=>{this.props.navigation.navigate('Profile')}}>
-                    <View style = {{flexDirection:'row',marginTop:20, borderBottomColor: 'grey',borderBottomWidth: 1,}}>
+                    <View style = {{flexDirection:'row',marginTop:20, borderBottomColor: '#cccccc',borderBottomWidth: 1,}}>
                         <ProfileAvatar
                             style={styles.profileAvatar}
                             source={require('../assets/images/profile.jpg')}

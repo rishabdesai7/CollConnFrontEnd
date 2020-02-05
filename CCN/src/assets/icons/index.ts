@@ -879,6 +879,13 @@ export const LogoutIconOutline = (style: StyleProp<ImageStyle>): IconElement => 
   return Icon(source, style);
 };
 
+export const sendIconFill = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/arrow-right.png'),
+  };
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,
