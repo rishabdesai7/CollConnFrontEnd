@@ -1,6 +1,7 @@
 import React from 'react';
-import {Layout,List,TopNavigation,Divider,ListItem,Avatar} from '@ui-kitten/components';
+import {Layout,List,TopNavigation,Divider,ListItem,Avatar,TopNavigationAction} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
+import {SearchIconOutline} from '../assets/icons/index';
 export default class ConversationScreen extends React.Component{
     data = new Array(10).fill({
         Username: 'Username',
@@ -22,13 +23,18 @@ export default class ConversationScreen extends React.Component{
             onPress= {()=>{this.props.navigation.navigate('Message')}}
         />
     );
+    renderSearchAction = () => (
+      <TopNavigationAction icon={SearchIconOutline} onPress={()=>{this.props.navigation.navigate('Search')}}/>
+      //<View></View>
+    );
     render(){
         return(
             <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15,paddingTop:20}}>
                     <TopNavigation
-                    title= 'Conversations'
-                    alignment='center'
-                    titleStyle = {{fontWeight:'200',fontSize:20,lineHeight:30,marginHorizontal:30}}
+                      title= 'Conversations'
+                      alignment='center'
+                      titleStyle = {{fontWeight:'200',fontSize:20,lineHeight:30,marginHorizontal:30}}
+                      rightControls = {this.renderSearchAction()}
                     />
                     <Divider/>
                     <List

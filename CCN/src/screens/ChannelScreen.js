@@ -1,7 +1,6 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction,Input} from '@ui-kitten/components';
-import {HeartIconFill,MoreVerticalIconFill,BellIconOutline,PersonAddIconFill,AssignIconFill} from '../assets/icons/index'
+import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
+import {HeartIconFill,MoreVerticalIconFill,PersonAddIconFill,AssignIconFill} from '../assets/icons/index'
 import Post from '../Components/Post.component';
 export default class ChannelScreen extends React.Component{
 

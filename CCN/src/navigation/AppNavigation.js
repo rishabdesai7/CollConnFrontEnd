@@ -11,6 +11,7 @@ import ComplaintScreen from '../screens/ComplaintScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import CreateChannelScreen from '../screens/CreateChannelScreen';
 import MessageScreen from '../screens/MessageScreen';
+import ConversationSearchScreen from '../screens/ConversationSearchScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
@@ -44,6 +45,7 @@ const ProfileNavigator = createStackNavigator({
 const ConversationNavigator = createStackNavigator({
   Conversation:ConversationScreen,
   Message:MessageScreen,
+  Search:ConversationSearchScreen,
 }, {
   headerMode: 'none',
 });
