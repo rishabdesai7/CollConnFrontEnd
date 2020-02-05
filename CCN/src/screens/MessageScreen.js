@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         height: 'auto', 
         width: 'auto',
         alignSelf: 'flex-start',
-        backgroundColor:'#f2f2f2',
+        backgroundColor:'#d9d9d9',
         maxWidth:'49%',
         borderRadius:12,
         borderTopLeftRadius:0,
