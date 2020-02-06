@@ -4,6 +4,7 @@ import { Button, Input, Text, Layout} from '@ui-kitten/components';
 import {ImageIconOutline,AttachIconOutline} from '../assets/icons/index';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
+import Constants from 'expo-constants';
 
 export default class AddPostScreen extends React.Component{
 
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 32,
+    marginTop: Constants.statusBarHeight,
     minHeight: 150,
   },
   formContainer: {

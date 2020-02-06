@@ -12,6 +12,7 @@ import NotificationScreen from '../screens/NotificationScreen';
 import CreateChannelScreen from '../screens/CreateChannelScreen';
 import MessageScreen from '../screens/MessageScreen';
 import ConversationSearchScreen from '../screens/ConversationSearchScreen';
+import AddPeopleScreen from '../screens/AddPeopleScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
@@ -28,6 +29,7 @@ const ChannelNavigator = createStackNavigator({
   Channel: ChannelScreen,
   Comment : CommentScreen,
   AddPost : AddPostScreen,
+  AddPeople:AddPeopleScreen,
 }, {
   headerMode: 'none',
 });

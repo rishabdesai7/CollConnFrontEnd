@@ -1,7 +1,8 @@
 import React from 'react';
 import { Layout,List,ListItem, Input, Button} from '@ui-kitten/components';
-import {StyleSheet,View} from 'react-native'
-import {PaperPlaneIconFill} from '../assets/icons/index'
+import {StyleSheet,View} from 'react-native';
+import {PaperPlaneIconFill} from '../assets/icons/index';
+import Constants from 'expo-constants';
 export default class CommentScreen extends React.Component{
   data = new Array(5).fill({
     title: 'Title for Item',
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   formContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop:Constants.statusBarHeight,
     paddingHorizontal: 16,
     flexDirection:'row',
   },

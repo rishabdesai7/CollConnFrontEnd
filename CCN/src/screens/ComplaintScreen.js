@@ -5,6 +5,7 @@ import {ImageIconOutline,AttachIconOutline} from '../assets/icons/index';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import {ArrowDownFill} from '../assets/icons/index';
+import Constants from 'expo-constants';
 export default class ComplaintScreen extends React.Component{
     state={
         on:'n',
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 32,
+    marginTop: Constants.statusBarHeight,
     minHeight: 100,
   },
   formContainer: {

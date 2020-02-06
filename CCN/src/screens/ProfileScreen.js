@@ -4,6 +4,7 @@ import { Button, Layout, TopNavigation} from '@ui-kitten/components';
 import { ProfileAvatar } from '../Components/profile-avatar.component';
 import { ProfileSetting } from '../Components/profile-setting.component';
 import {CameraIconFill} from '../assets/icons/index'
+import Constants from 'expo-constants';
 
 
 export default class ProfileScreen extends React.Component{
@@ -25,7 +26,7 @@ export default class ProfileScreen extends React.Component{
                     <TopNavigation
                         alignment='center'
                         title='Profile'
-                        style ={[styles.header,{marginTop:25}]}
+                        style ={[styles.header,{marginTop:Constants.statusBarHeight}]}
                     />
                     <ProfileAvatar
                         style={styles.profileAvatar}

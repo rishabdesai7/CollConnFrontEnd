@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
 import {HeartIconFill,MoreVerticalIconFill,PersonAddIconFill,AssignIconFill} from '../assets/icons/index'
 import Post from '../Components/Post.component';
+import Constants from 'expo-constants';
 export default class ChannelScreen extends React.Component{
 
     state ={
@@ -50,7 +51,7 @@ export default class ChannelScreen extends React.Component{
         </OverflowMenu>
       );
     renderAddAction = () => (
-      <TopNavigationAction icon={PersonAddIconFill}/>
+      <TopNavigationAction icon={PersonAddIconFill} onPress={()=>{this.props.navigation.navigate('AddPeople')}}/>
       //<View></View>
     );
     renderPostAction = () => (
@@ -77,7 +78,7 @@ export default class ChannelScreen extends React.Component{
                 <TopNavigation
                     title= {this.state.channel}
                     rightControls={this.renderRightControls()}
-                    style ={{marginTop:25}}
+                    style ={{marginTop:Constants.statusBarHeight}}
                     titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40,marginHorizontal:30}}
                   />
                   <List

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Layout,List,ListItem,TopNavigation} from '@ui-kitten/components';
+import Constants from 'expo-constants';
 export default class MenuScreen extends React.Component{
     data = new Array(10).fill({
         title: 'Title for Item',
@@ -13,7 +14,7 @@ export default class MenuScreen extends React.Component{
       );
     render(){
         return(
-            <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15,paddingTop:20}}>
+            <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15,paddingTop:Constants.statusBarHeight}}>
                     <TopNavigation
                     title= 'NOTIFICATIONS'
                     alignment='center'

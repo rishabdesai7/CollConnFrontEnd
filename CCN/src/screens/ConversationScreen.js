@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout,List,TopNavigation,Divider,ListItem,Avatar,TopNavigationAction} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 import {SearchIconOutline} from '../assets/icons/index';
+import Constants from 'expo-constants';
 export default class ConversationScreen extends React.Component{
     data = new Array(10).fill({
         Username: 'Username',
@@ -29,7 +30,7 @@ export default class ConversationScreen extends React.Component{
     );
     render(){
         return(
-            <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15,paddingTop:20}}>
+            <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15,paddingTop:Constants.statusBarHeight}}>
                     <TopNavigation
                       title= 'Conversations'
                       alignment='center'

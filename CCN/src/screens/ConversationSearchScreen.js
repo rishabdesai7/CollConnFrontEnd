@@ -1,6 +1,7 @@
 import React from 'react';
-import {Layout,List,Divider,ListItem,Avatar,Input} from '@ui-kitten/components';
+import {Layout,List,ListItem,Avatar,Input} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
+import Constants from 'expo-constants';
 export default class ConversationSearchScreen extends React.Component{
     state ={
         searchText:'',
@@ -43,7 +44,7 @@ export default class ConversationSearchScreen extends React.Component{
     );
     render(){
         return(
-            <Layout style = {{width:'100%',height:'100%',paddingTop:20}}>
+            <Layout style = {{width:'100%',height:'100%',paddingTop:Constants.statusBarHeight}}>
                     <Input 
                         style={styles.input}
                         value={this.state.searchText}

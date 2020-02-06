@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View} from 'react-native';
 import { Button, Input, Text, Layout} from '@ui-kitten/components';
-
+import Constants from 'expo-constants';
 
 export default class CreateChannelScreen extends React.Component{
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 32,
+    marginTop: Constants.statusBarHeight,
     minHeight: 150,
   },
   formContainer: {

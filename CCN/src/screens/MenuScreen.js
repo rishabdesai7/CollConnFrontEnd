@@ -3,6 +3,7 @@ import {View,StyleSheet,TouchableOpacity,AsyncStorage} from 'react-native'
 import {Layout,Text,List,ListItem} from '@ui-kitten/components';
 import { ProfileAvatar } from '../Components/profile-avatar.component';
 import {PlusIconFill,LogoutIconOutline,AlertIconOutline,BellIconOutline} from '../assets/icons/index';
+import Constants from 'expo-constants';
 export default class MenuScreen extends React.Component{
     _signOutAsync = async () => {
         await AsyncStorage.clear();
@@ -43,7 +44,7 @@ export default class MenuScreen extends React.Component{
         return(
             <Layout style = {{width:'100%',height:'100%',paddingHorizontal:15}}>
                 <TouchableOpacity onPress =  {()=>{this.props.navigation.navigate('Profile')}}>
-                    <View style = {{flexDirection:'row',marginTop:20, borderBottomColor: '#cccccc',borderBottomWidth: 1,}}>
+                    <View style = {{flexDirection:'row',marginTop:Constants.statusBarHeight, borderBottomColor: '#cccccc',borderBottomWidth: 1,}}>
                         <ProfileAvatar
                             style={styles.profileAvatar}
                             source={require('../assets/images/profile.jpg')}

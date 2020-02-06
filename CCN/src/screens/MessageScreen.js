@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout,List,TopNavigation,Input,Text,Button,Divider,TopNavigationAction,Avatar} from '@ui-kitten/components';
 import {View,StyleSheet,KeyboardAvoidingView,Keyboard} from 'react-native';
 import {sendIconFill} from '../assets/icons/index';
+import Constants from 'expo-constants';
 export default class MessageScreen extends React.Component{
     state={
         data : [
@@ -87,7 +88,7 @@ export default class MessageScreen extends React.Component{
             <KeyboardAvoidingView
             style = {{ flex: 1,backgroundColor:'white' }}
             behavior = "padding" >
-                 <Layout style = {{width:'100%',height:'100%',paddingTop:20}}>
+                 <Layout style = {{width:'100%',height:'100%',paddingTop:Constants.statusBarHeight}}>
                     <TopNavigation
                         title= 'username'
                         alignment='center'
