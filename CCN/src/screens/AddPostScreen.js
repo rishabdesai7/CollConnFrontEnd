@@ -5,9 +5,25 @@ import {ImageIconOutline,AttachIconOutline} from '../assets/icons/index';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import Constants from 'expo-constants';
+import * as SecureStore from 'expo-secure-store';
 
 export default class AddPostScreen extends React.Component{
 
+    state = {
+      acc_type : 'S',
+    }
+    async componentDidMount(){
+      try{
+        var data = await SecureStore.getItemAsync('userData');
+        data = await JSON.parse(data)
+        this.setState({
+          acc_type : data['accounttype'],
+        });
+      }
+      catch(e){
+        console.log(e)
+      }
+    }
     _pickDocument = async () => {
         let result = await DocumentPicker.getDocumentAsync({});
         alert(result.uri);
@@ -22,6 +38,7 @@ export default class AddPostScreen extends React.Component{
 
         alert(result.uri);
         console.log(result)
+        
 
         if (!result.cancelled) {
         this.setState({ image: result.uri });
@@ -49,10 +66,11 @@ export default class AddPostScreen extends React.Component{
                     style = {[styles.input,{borderRadius:20}]}
                 />
                 </View>
+                {(this.state.acc_type == 'F')?(
                 <View style = {{flexDirection:'row'}}>
                     <Button appearance='ghost' style = {{flex:1}} onPress={this._pickImage} icon = {ImageIconOutline}/>
                     <Button appearance='ghost' style = {{flex:1}} onPress={this._pickDocument}icon = {AttachIconOutline}/>
-                </View>
+                </View>):null}
                 <Button
                 style={styles.LogInButton}
                 size='giant'

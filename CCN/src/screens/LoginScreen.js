@@ -8,6 +8,7 @@ import {
   EyeOffIconFill,
   EyeOnIconFill,
 } from '../assets/icons/index';
+import * as FileSystem from 'expo-file-system';
 
 
 export default class LoginScreen extends React.Component{
@@ -34,10 +35,13 @@ export default class LoginScreen extends React.Component{
         switch(resp.status){
           case 200:
               resp = await resp.json();
-              await SecureStore.deleteItemAsync('auth');
               await SecureStore.setItemAsync('auth', resp['auth']);
+              await SecureStore.setItemAsync('userData',JSON.stringify(resp['data']))
               await AsyncStorage.setItem('userToken', 'abc');
               this.props.navigation.navigate('App');
+              break;
+          case 403:
+              Alert.alert("Please activate your account using the link sent to your registered email!");
               break;
           case 400:
           case 401:

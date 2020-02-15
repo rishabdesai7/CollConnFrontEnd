@@ -1,32 +1,48 @@
 import React from 'react';
+import {Alert} from 'react-native';
 import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
 import {HeartIconFill,MoreVerticalIconFill,PersonAddIconFill,AssignIconFill} from '../assets/icons/index'
 import Post from '../Components/Post.component';
 import Constants from 'expo-constants';
-export default class ChannelScreen extends React.Component{
+import {ChannelList} from '../urls/urlgenerator';
+import * as SecureStore from 'expo-secure-store';
 
+export default class ChannelScreen extends React.Component{
     state ={
       menuVisible :false,
       channel:'College',
+      menuData : [],
+      acc_type : 'S',
+    }
+    async componentDidMount(){
+      var data = await SecureStore.getItemAsync('userData');
+      data = await JSON.parse(data);
+      this.setState({
+        acc_type : data['accounttype'],
+      });
+      var resp = await fetch(ChannelList(), {
+        headers: {
+          'Authorization': await SecureStore.getItemAsync('auth'),
+        },
+        method: 'GET',
+      });
+      switch(resp.status){
+        case 200:
+            resp = await resp.json();
+            this.setState({menuData:resp['data']})
+            break;
+        case 404:
+            Alert.alert("Session expired.please logout and login again!");
+            break;
+        default:
+             this.forceUpdate();
+             break;
+      }
     }
     data = new Array(10).fill({
         title: 'Title for Item',
         description: 'Description for Item',
       });
-    menuData = [
-        {
-          title: 'College',
-        },
-        {
-          title: 'Canteen',
-        },
-        {
-          title: 'Library',
-        },
-        {
-          title: 'Placement',
-        },
-      ];
       toggleMenu = () => {
         (this.state.menuVisible)?this.setState({menuVisible:false}):this.setState({menuVisible:true});
       };
@@ -34,12 +50,12 @@ export default class ChannelScreen extends React.Component{
       onMenuItemSelect = (index) => {
         // Handle Item Select
     
-        this.setState({menuVisible : false,channel:this.menuData[index].title});
+        this.setState({menuVisible : false,channel:this.state.menuData[index].title});
       };
     renderMenuAction = () => (
         <OverflowMenu
           visible={this.state.menuVisible}
-          data={this.menuData}
+          data={this.state.menuData}
           onSelect={this.onMenuItemSelect}
           onBackdropPress={this.toggleMenu}
           style = {{marginTop:30,}}
@@ -59,7 +75,10 @@ export default class ChannelScreen extends React.Component{
       //<View></View>
     );
     renderRightControls = ()=>{
-      return [this.renderAddAction(),this.renderPostAction(),this.renderMenuAction()];
+      if(this.state.acc_type == 'F')
+        return [this.renderAddAction(),this.renderPostAction(),this.renderMenuAction()];
+      else
+        return [this.renderPostAction(),this.renderMenuAction()];
     }
     renderItemAccessory = (style) => (
         <Button appearance='ghost' status='danger' icon={HeartIconFill} onPress={this._signOutAsync}/>
