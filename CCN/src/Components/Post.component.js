@@ -7,42 +7,44 @@ import {
 import {
   Card,
   Button,
-  ButtonGroup,
   Text,
+  Layout
 } from '@ui-kitten/components';
 import {
-    HeartIconFill,
-    MessageCircleIconFill,
     MessageCircleIconOutline,
     HeartIconOutline,
 } from '../assets/icons/index';
+import {uri} from '../urls/urlgenerator'
   
 class CardCustomHeaderShowcase extends React.Component{
     state = {
         likeIcon:HeartIconOutline,
         commentIcon : MessageCircleIconOutline,
     }
-    CustomHeader = () => (
-        <React.Fragment>
-          <Text
-            style={styles.headerText}
-            category='h6'>
-            {this.props.header}
-          </Text>
-        </React.Fragment>
-      );
       render(){
           return(
-              <View style = {{margin : 10}}>
-                <Image source={require('../assets/images/back.png')} style={styles.headerImage}/>
+              <Layout style = {{margin : 10,borderRadius:20}}>
+                 <Text
+                    style={{marginHorizontal:10,marginTop:10,fontWeight:'bold'}}
+                    category='h6'>
+                    {this.props.by}
+                  </Text>
+                  <Text
+                    style={{marginHorizontal:15}}
+                    category='p2'
+                    appearance='hint'
+                    >
+                    {this.props.date}
+                  </Text>
+                {(this.props.image != null)?(<Image source={{uri:uri+this.props.image}} style={styles.headerImage}/>):null}
                 <Card>
                     <Text
                     style={styles.headerText}
                     category='h6'>
-                    {this.props.header}
+                    {this.props.title}
                     </Text>
                     <Text>
-                    {this.props.text}
+                    {this.props.description}
                     </Text>
                     <Button 
                       style={styles.button} 
@@ -53,7 +55,7 @@ class CardCustomHeaderShowcase extends React.Component{
                       comment
                     </Button>
                 </Card>
-              </View>
+              </Layout>
           );
       }   
 }
@@ -61,8 +63,12 @@ export default class Post extends React.Component{
     render(){
         return(
             <CardCustomHeaderShowcase
-                text = {this.props.text}
-                header = {this.props.header}
+                by = {this.props.by}
+                date = {this.props.date}
+                title={this.props.title}
+                description={this.props.description}
+                image = {this.props.image}
+                file = {this.props.file}
                 commentAction = {this.props.commentAction}
             />
         );

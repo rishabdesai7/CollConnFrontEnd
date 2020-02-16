@@ -110,7 +110,7 @@ export default class MenuScreen extends React.Component{
     renderItem = ({ item, index }) => (
         <ListItem
             title={`${item.title}`}
-            onPress = {(index,event)=>{console.log(this.state.data);this.state.data[index].onpress()}}
+            onPress = {(index,event)=>{this.state.data[index].onpress()}}
             titleStyle ={{fontWeight:'bold',fontSize:15}}
             icon = {item.icon}
             style={{height:50}}
