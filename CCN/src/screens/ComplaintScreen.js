@@ -1,166 +1,102 @@
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
-import { Button, Input, Text, Layout,OverflowMenu} from '@ui-kitten/components';
-import {ImageIconOutline,AttachIconOutline} from '../assets/icons/index';
-import * as ImagePicker from 'expo-image-picker';
-import * as DocumentPicker from 'expo-document-picker';
-import {ArrowDownFill} from '../assets/icons/index';
+import { StyleSheet, View,Picker,Alert} from 'react-native';
+import { Button, Input, Text, Layout,Select} from '@ui-kitten/components';
 import Constants from 'expo-constants';
-export default class ComplaintScreen extends React.Component{
+import * as SecureStore from 'expo-secure-store';
+import {AddComplaint} from '../urls/urlgenerator';
+export default class CreateChannelScreen extends React.Component{
     state={
-        on:'n',
-        visible:false,
+      name:'',
+      type:'P',
+      issue:'',
     }
-    selectOptions = [
-        { title: 'Channel' },
-        { title: 'Person' },
-    ];
-    toggleMenu = () => {
-        (this.state.visible)?this.setState({visible:false}):this.setState({visible:true});
-      };
-    onMenuItemSelect = async(index) => {
-        await this.setState({visible:false});
-        this.setState({on:this.selectOptions[index].title});
-      };
-    _pickDocument = async () => {
-        let result = await DocumentPicker.getDocumentAsync({});
-        alert(result.uri);
-        console.log(result);
-    }
-
-    _pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        });
-
-        alert(result.uri);
-        console.log(result)
-
-        if (!result.cancelled) {
-        this.setState({ image: result.uri });
-        }
+    submit = async()=>{
+      var data = new FormData();
+      if(this.state.type == 'P'){
+        data.append('idp',this.state.name);
+        data.append('name','');
+      }
+      else{
+        data.append('idp','');
+        data.append('name',this.state.name);
+      }
+      data.append('issue',this.state.issue);
+      var resp = await fetch(AddComplaint(),
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
+          'Authorization': await SecureStore.getItemAsync('auth'),
+        },
+        method:'POST',
+        body: data
+      });
+      switch(resp.status){
+        case 200:
+            this.props.navigation.goBack();
+            break;
+        case 404:
+            Alert.alert("Session expired.please logout and login again!");
+            break;
+        default:
+             Alert.alert('OOPSY!Please try Again');
+             break;
+      }
     }
     render(){
-        switch(this.state.on){
-            case 'n':
-                return(
-                    <Layout style = {{height:'100%'}}>
-                        <View style={styles.buttonContainer}>
-                            <OverflowMenu
-                                data={this.selectOptions}
-                                visible={this.state.visible}
-                                onBackdropPress={this.toggleMenu}
-                                onSelect={this.onMenuItemSelect}
-                                style = {{margin:30}}
-                                >
-                                <Button style={[styles.button, { flexDirection: 'row-reverse' }]} status='danger' onPress={this.toggleMenu} icon={ArrowDownFill}>
-                                   Select Type
-                                </Button>
-                            </OverflowMenu>
-                        </View>
-                    </Layout>
-                );
-            case 'Person':
-                return (
-                    <Layout style = {{height:'100%'}}>
-                        <View style={styles.headerContainer}>
-                        <Text
-                            category='h1'
-                            >
-                            Report
-                        </Text>
-                        </View>
-                        <View style={styles.formContainer}>
-                        <Input
-                            placeholder='Name'
-                            style={styles.input}
-                        />
-                        <Input
-                            placeholder='Dept'
-                            style={styles.input}
-                        />
-                        <Input
-                            placeholder='Id'
-                            style={styles.input}
-                        />
-                        <Input
-                            placeholder='Designation'
-                            style={styles.input}
-                        />
-                        <Input
-                            placeholder='Issue'
-                            multiline = {true}
-                            size='large'
-                            style = {[styles.input,{borderRadius:20}]}
-                        />
-                        </View>
-                        <View style = {{flexDirection:'row'}}>
-                            <Button appearance='ghost' style = {{flex:1}} onPress={this._pickImage} icon = {ImageIconOutline}/>
-                            <Button appearance='ghost' style = {{flex:1}} onPress={this._pickDocument}icon = {AttachIconOutline}/>
-                        </View>
-                        <Button
-                        style={styles.LogInButton}
-                        size='giant'
-                        status = 'danger'
-                        >
-                        Report
-                        </Button>
-                    </Layout>
-                );
-            case 'Channel':
-                return (
-                    <Layout style = {{height:'100%'}}>
-                        <View style={styles.headerContainer}>
-                        <Text
-                            category='h1'
-                            >
-                            Report
-                        </Text>
-                        </View>
-                        <View style={styles.formContainer}>
-                        <Input
-                            placeholder='Name'
-                            style={styles.input}
-                        />
-                        <Input
-                            placeholder='Issue'
-                            multiline = {true}
-                            size='large'
-                            style = {[styles.input,{borderRadius:20}]}
-                        />
-                        </View>
-                        <View style = {{flexDirection:'row'}}>
-                            <Button appearance='ghost' style = {{flex:1}} onPress={this._pickImage} icon = {ImageIconOutline}/>
-                            <Button appearance='ghost' style = {{flex:1}} onPress={this._pickDocument}icon = {AttachIconOutline}/>
-                        </View>
-                        <Button
-                        style={styles.LogInButton}
-                        size='giant'
-                        status = 'danger'
-                        >
-                        Report
-                        </Button>
-                    </Layout>
-            );
-        }
+        return (
+        <Layout style = {{height:'100%'}}>
+                <View style={styles.headerContainer}>
+                <Text
+                    category='h1'
+                    >
+                    Report
+                </Text>
+                </View>
+                <View style={styles.formContainer}>
+                <Input
+                    placeholder={(this.state.type=='P')?'Id':'Name'}
+                    style={styles.input}
+                    value = {this.state.name}
+                    onChangeText = {(val)=>{this.setState({name:val})}}
+                />
+                <Input
+                    placeholder='Issue'
+                    multiline = {true}
+                    size='large'
+                    style = {[styles.input,{borderRadius:20}]}
+                    onChangeText = {(val)=>{this.setState({issue:val})}}
+                    value = {this.state.issue}
+                />
+                </View>
+                <Picker
+                  selectedValue={this.state.type}
+                  style={{height: 50, width: 100,marginHorizontal:20,backgroundColor:'#f2f2f2',marginVertical:20}}
+                  onValueChange={(itemValue, itemIndex) =>
+                    this.setState({type: itemValue})}
+                  >
+                  <Picker.Item label="Person" value="P" />
+                  <Picker.Item label="Channel" value="C" />
+                </Picker>
+                <Button
+                style={styles.LogInButton}
+                size='giant'
+                status = 'danger'
+                onPress={this.submit}
+                >
+                Report
+                </Button>
+            </Layout>
+        );
   }
 };
 
 const styles = StyleSheet.create({
-   buttonContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 376,
-      },
-    button: {
-        width: 192,
-      },
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: Constants.statusBarHeight,
-    minHeight: 100,
+    minHeight: 150,
   },
   formContainer: {
     justifyContent: 'center',

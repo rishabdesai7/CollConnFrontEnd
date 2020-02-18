@@ -12,3 +12,4 @@ export var getPost = (channel)=>{return uri+'/colcon/getPost/'+channel}
 export var AddComment = ()=>{return uri+'/colcon/addComment'}
 export var getComments = (id)=>{return uri+'/colcon/getComment/'+id}
 export var AddChannel = ()=>{return uri+'/colcon/addChannelRequest'}
+export var AddComplaint = ()=>{return uri+'/colcon/addComplaint'}
