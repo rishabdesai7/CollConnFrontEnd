@@ -885,7 +885,12 @@ export const sendIconFill = (style: StyleProp<ImageStyle>): IconElement => {
   };
   return Icon(source, style);
 };
-
+export const downArrowOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/arrow-downward-outline.png'),
+  };
+  return Icon(source, style);
+};
 export {
   Icon,
   IconSource,
