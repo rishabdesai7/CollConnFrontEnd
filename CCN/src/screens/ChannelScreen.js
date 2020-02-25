@@ -1,12 +1,11 @@
 import React from 'react';
 import {Alert} from 'react-native';
-import { Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
-import {HeartIconFill,MoreVerticalIconFill,PersonAddIconFill,AssignIconFill} from '../assets/icons/index'
+import {Layout,TopNavigation,List,Button,OverflowMenu,TopNavigationAction} from '@ui-kitten/components';
+import {HeartIconFill,MoreVerticalIconFill,PersonAddIconFill,AssignIconFill,info,deleteOutline} from '../assets/icons/index'
 import Post from '../Components/Post.component';
 import Constants from 'expo-constants';
-import {ChannelList} from '../urls/urlgenerator';
 import * as SecureStore from 'expo-secure-store';
-import {getPost} from '../urls/urlgenerator';
+import {getPost,DeleteChannel,ChannelList} from '../urls/urlgenerator';
 
 export default class ChannelScreen extends React.Component{
     state ={
@@ -24,9 +23,6 @@ export default class ChannelScreen extends React.Component{
         acc_type : data['accounttype'],
       });
       await this.getData(this.state.channel);
-      this.props.navigation.addListener("didFocus", async() =>{
-        await this.getData(this.state.channel);
-      });
       var resp = await fetch(ChannelList(), {
         headers: {
           'Authorization': await SecureStore.getItemAsync('auth'),
@@ -45,6 +41,27 @@ export default class ChannelScreen extends React.Component{
              this.forceUpdate();
              break;
       }
+      this.props.navigation.addListener("didFocus", async() =>{
+        await this.getData(this.state.channel);
+        var resp = await fetch(ChannelList(), {
+          headers: {
+            'Authorization': await SecureStore.getItemAsync('auth'),
+          },
+          method: 'GET',
+        });
+        switch(resp.status){
+          case 200:
+              resp = await resp.json();
+              this.setState({menuData:resp['data']})
+              break;
+          case 404:
+              Alert.alert("Session expired.please logout and login again!");
+              break;
+          default:
+               this.forceUpdate();
+               break;
+        }
+      });
     }
     getData = async(channel)=>{
       var resp = await fetch(getPost(channel),{
@@ -91,7 +108,7 @@ export default class ChannelScreen extends React.Component{
         </OverflowMenu>
       );
     renderAddAction = () => (
-      <TopNavigationAction icon={PersonAddIconFill} onPress={()=>{this.props.navigation.navigate('AddPeople')}}/>
+      <TopNavigationAction icon={PersonAddIconFill} onPress={()=>{this.props.navigation.navigate('AddPeople',{channel:this.state.channel})}}/>
       //<View></View>
     );
     renderPostAction = () => (
@@ -103,6 +120,34 @@ export default class ChannelScreen extends React.Component{
         return [this.renderAddAction(),this.renderPostAction(),this.renderMenuAction()];
       else
         return [this.renderPostAction(),this.renderMenuAction()];
+    }
+    renderLeftControl = ()=>{
+      if(this.state.acc_type == 'F')
+        return (
+          <TopNavigationAction 
+            icon = {deleteOutline} 
+            onPress={async()=>{
+              var resp = await fetch(DeleteChannel(this.state.channel), {
+                headers: {
+                  'Authorization': await SecureStore.getItemAsync('auth'),
+                },
+                method: 'GET',
+              });
+              switch(resp.status){
+                case 200:
+                    this.setState({channel:'College'});
+                    this.componentDidMount();
+                    break;
+                case 404:
+                    Alert.alert("Session expired.please logout and login again!");
+                    break;
+                default:
+                    this.setState({channel:'College'});
+                    this.componentDidMount();
+                    break;
+              }
+            }}
+          />)
     }
     renderItemAccessory = (style) => (
         <Button appearance='ghost' status='danger' icon={HeartIconFill} onPress={this._signOutAsync}/>
@@ -129,6 +174,7 @@ export default class ChannelScreen extends React.Component{
                     title= {this.state.channel}
                     rightControls={this.renderRightControls()}
                     style ={{marginTop:Constants.statusBarHeight}}
+                    leftControl = {this.renderLeftControl()}
                     titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40,marginHorizontal:30}}
                   />
                   <List

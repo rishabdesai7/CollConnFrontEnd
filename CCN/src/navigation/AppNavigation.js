@@ -13,10 +13,13 @@ import CreateChannelScreen from '../screens/CreateChannelScreen';
 import MessageScreen from '../screens/MessageScreen';
 import ConversationSearchScreen from '../screens/ConversationSearchScreen';
 import AddPeopleScreen from '../screens/AddPeopleScreen';
+import AddPeopleListScreen from '../screens/AddPeopleListScreen';
+import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import { createAppContainer,createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
 
 const AuthNavigator = createStackNavigator({
   Login: LoginScreen,
@@ -30,6 +33,7 @@ const ChannelNavigator = createStackNavigator({
   Comment : CommentScreen,
   AddPost : AddPostScreen,
   AddPeople:AddPeopleScreen,
+  AddPeopleList:AddPeopleListScreen,
 }, {
   headerMode: 'none',
 });
@@ -40,6 +44,7 @@ const ProfileNavigator = createStackNavigator({
   Create : CreateChannelScreen,
   Notification:NotificationScreen,
   Report:ComplaintScreen,
+  ChangePassword:ChangePasswordScreen,
 }, {
   headerMode: 'none',
 });

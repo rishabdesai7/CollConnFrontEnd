@@ -1,62 +1,162 @@
-import React, { Component } from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
-import {Layout,ListItem} from '@ui-kitten/components';
-import { CheckBox } from 'react-native-elements';
-
-
-export default class SectionListBasics extends Component {
-
-    renderAccessory = (style,index) => {
-        console.log(index);
-        return (
-        <CheckBox
-          checked={true}
-          size= {18}
-          //onChange={() => onCheckBoxCheckedChange(index)}
-        />
-      );}
-    
-    renderItem = ({item}) => (
-        <ListItem
-            title={item}
-            accessory={this.renderAccessory}
-        />
-    );
-    render() {
-        return (
-        <View style={styles.container}>
-            <SectionList
-            sections={[
-                {title: 'D', data: ['Devin', 'Dan', 'Dominic']},
-                {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-            ]}
-            //renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-            renderItem = {this.renderItem}
-            renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-            keyExtractor={(item, index) => index}
+import React from 'react';
+import { Layout,List,Text, Input, Button,Avatar,Divider,TopNavigation,ViewPager,Radio,RadioGroup,} from '@ui-kitten/components';
+import {StyleSheet,View,Alert} from 'react-native';
+import {PaperPlaneIconFill} from '../assets/icons/index';
+import Constants from 'expo-constants';
+import {AddPeople} from '../urls/urlgenerator';
+import * as SecureStore from 'expo-secure-store';
+export default class AddPeopleScreen extends React.Component{
+    state = {
+        Username : '',
+        dept:'IT',
+        year:'1',
+        Section:'A',
+        selectedIndex :0,
+    }
+    addPeople = async()=>{
+        var data = new FormData();
+        var user = [this.state.Username]
+        user.forEach((item)=>{
+            data.append('users',item)
+        });
+        data.append('channel',this.props.navigation.state.params.channel);
+        var resp = await fetch(AddPeople(),
+        {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data',
+            'Authorization': await SecureStore.getItemAsync('auth'),
+            },
+            method:'POST',
+            body: data
+        });
+        switch(resp.status){
+            case 200:
+                this.props.navigation.goBack();
+                break;
+            case 404:
+                Alert.alert("Session expired.please logout and login again!");
+                break;
+            default:
+                Alert.alert('OOPSY!Please try Again');
+                break;
+        }
+    }
+    render(){
+      return (
+        <Layout style = {{height:'100%'}}>
+            <TopNavigation
+                    title= {'Add People+'}
+                    style ={{marginTop:Constants.statusBarHeight}}
+                    titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40,marginHorizontal:30}}
+                    alignment='center'
             />
-        </View>
-        );
+            <Divider/>
+          <View style={styles.formContainer}>
+              <Input
+                placeholder='Username'
+                size='large'
+                style = {styles.input}
+                value = {this.state.Username}
+                onChangeText = {(text)=>{this.setState({Username:text})}}
+              />
+              <Button 
+                style={styles.button} 
+                appearance='ghost' 
+                icon={PaperPlaneIconFill}
+                onPress = {this.addPeople}
+              />
+            </View>
+            <Divider/>
+            <View style={{backgroundColor:'#f2f2f2',alignItems:'center',justifyContent:'center'}}>
+                <Text category='h6'>Or</Text>
+            </View>
+            <Divider/>
+            <TopNavigation
+                title= {'Filters'}
+                titleStyle = {{fontWeight:'bold',fontSize:20,lineHeight:40,marginHorizontal:30}}
+                alignment='center'
+            />
+            <Divider/>
+            <RadioGroup 
+              style = {{flexDirection:'row',alignItems:'center',justifyContent:'center'}} 
+              selectedIndex = {this.state.selectedIndex}
+              onChange={(index) => {this.setState({selectedIndex:index});}}
+              >
+                <Radio style={styles.radio} text='Faculty'/>
+                <Radio style={styles.radio} text='Students'/>
+            </RadioGroup>
+            <Layout style = {{alignItems:'center',justifyContent:'center',padding:20}}>
+                <Input
+                    placeholder='Department'
+                    size='large'
+                    style ={{margin:8}}
+                    value = {this.state.dept}
+                    onChangeText = {(text)=>{this.setState({dept:text})}}
+                />
+                <Input
+                    placeholder='Year'
+                    size='large'
+                    style ={{margin:8}}
+                    disabled = {(this.state.selectedIndex == 0)}
+                    value = {this.state.year}
+                    onChangeText = {(text)=>{this.setState({year:text})}}
+                />
+                <Input
+                    placeholder='Section'
+                    size='large'
+                    style ={{margin:8}}
+                    disabled = {(this.state.selectedIndex == 0)}
+                    value = {this.state.Section}
+                    onChangeText = {(text)=>{this.setState({Section:text})}}
+                />
+                <Button style ={{margin:8}} onPress={()=>{var fd = {channel:this.props.navigation.state.params.channel,type:this.state.selectedIndex,dept:this.state.dept,year:this.state.year,Section:this.state.Section};this.props.navigation.navigate('AddPeopleList',{fd:fd})}}>Submit</Button>
+            </Layout>
+        </Layout>
+      );
     }
 }
-
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
+  formContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin:10,
+    paddingHorizontal: 16,
+    flexDirection:'row',
   },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
+  input:{
+    borderRadius:20,
+    flex:100
   },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+  button: {
+    flex:1,
   },
-})
+  message:{
+        marginVertical:10,
+        height: 'auto', 
+        width: 'auto',
+        alignSelf: 'flex-start',
+        backgroundColor:'#f2f2f2',
+        borderRadius:12,
+        padding:10,
+        maxWidth:'80%',
+    },
+    avatar: {
+      width: 40,
+      height: 40,
+      marginVertical:4,
+      tintColor: null,
+      marginRight:10,
+      marginTop:10,
+    },
+    tab: {
+        height: 192,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    radio: {
+        marginHorizontal: 28,
+        marginVertical:8,
+    },
+});
+

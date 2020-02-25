@@ -3,7 +3,7 @@ import {View,StyleSheet,TouchableOpacity,AsyncStorage} from 'react-native'
 import {Layout,Text,List,ListItem} from '@ui-kitten/components';
 import { ProfileAvatar } from '../Components/profile-avatar.component';
 import {logout} from '../urls/urlgenerator'
-import {PlusIconFill,LogoutIconOutline,AlertIconOutline,BellIconOutline} from '../assets/icons/index';
+import {PlusIconFill,LogoutIconOutline,AlertIconOutline,BellIconOutline,AssignIconFill} from '../assets/icons/index';
 import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 import {uri} from '../urls/urlgenerator';
@@ -18,9 +18,14 @@ export default class MenuScreen extends React.Component{
                 icon:AlertIconOutline,
             },
             {
-                title: 'Notifications',
+                title: 'Invitations',
                 onpress:()=>{this.props.navigation.navigate('Notification')},
                 icon:BellIconOutline,
+            },
+            {
+                title:'ChangePassword',
+                onpress:()=>{this.props.navigation.navigate('ChangePassword')},
+                icon:AssignIconFill,
             },
             {
                 title: 'Logout',
@@ -67,9 +72,14 @@ export default class MenuScreen extends React.Component{
                                 icon:AlertIconOutline,
                             },
                             {
-                                title: 'Notifications',
+                                title: 'Invitations',
                                 onpress:()=>{this.props.navigation.navigate('Notification')},
                                 icon:BellIconOutline,
+                            },
+                            {
+                                title:'ChangePassword',
+                                onpress:()=>{this.props.navigation.navigate('ChangePassword')},
+                                icon:AssignIconFill,
                             },
                             {
                                 title: 'Logout',

@@ -891,6 +891,30 @@ export const downArrowOutline = (style: StyleProp<ImageStyle>): IconElement => {
   };
   return Icon(source, style);
 };
+export const checkMarkOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/checkmark-outline.png'),
+  };
+  return Icon(source, style);
+};
+export const closeOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/close-outline.png'),
+  };
+  return Icon(source, style);
+};
+export const info = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/info.png'),
+  };
+  return Icon(source, style);
+};
+export const deleteOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/trash-2-outline.png'),
+  };
+  return Icon(source, style);
+};
 export {
   Icon,
   IconSource,
