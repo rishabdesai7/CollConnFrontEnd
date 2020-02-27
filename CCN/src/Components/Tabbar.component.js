@@ -14,7 +14,6 @@ export const TabBarComponent = ({ navigation }) => {
       <SafeAreaView>
         <BottomNavigation selectedIndex={navigation.state.index} onSelect={onSelect} style={{marginVertical: 8,}} >
           <BottomNavigationTab title='Channel' icon ={LayoutIconOutline}/>
-          <BottomNavigationTab title='Conversation' icon ={PaperPlaneIconFill}/>
           <BottomNavigationTab title='Menu' icon= {MenuIconOutline}/>
         </BottomNavigation>
       </SafeAreaView>

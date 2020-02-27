@@ -6,6 +6,21 @@ import Post from '../Components/Post.component';
 import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 import {getPost,DeleteChannel,ChannelList} from '../urls/urlgenerator';
+import Pusher from 'pusher-js/react-native';
+
+
+
+
+
+// Enable pusher logging - don't include this in production
+//Pusher.logToConsole = true;
+
+var pusher = new Pusher('e8318624f1b41157722f', {
+  cluster: 'ap2',
+  forceTLS: true
+});
+var channel = pusher.subscribe('post');
+console.warn = (msg)=>{}
 
 export default class ChannelScreen extends React.Component{
     state ={
@@ -15,6 +30,14 @@ export default class ChannelScreen extends React.Component{
       acc_type : 'S',
       data : [],
       margin:0,
+    }
+    update = (data)=>{
+      if(data.channel == this.state.channel){
+        this.componentDidMount();
+      }
+    }
+    componentWillMount(){
+      channel.bind('posted',this.update);
     }
     async componentDidMount(){
       var data = await SecureStore.getItemAsync('userData');

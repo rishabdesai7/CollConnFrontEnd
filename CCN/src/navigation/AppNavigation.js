@@ -20,7 +20,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import {TabBarComponent} from '../Components/Tabbar.component';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-
+console.disableYellowBox = true;
 const AuthNavigator = createStackNavigator({
   Login: LoginScreen,
   ForgotPassword : ForgotPasswordScreen
@@ -59,7 +59,6 @@ const ConversationNavigator = createStackNavigator({
 
 const TabNavigator = createBottomTabNavigator({
   Channel: ChannelNavigator,
-  Conversation:ConversationNavigator,
   Profile: ProfileNavigator,
 }, {
   tabBarComponent: TabBarComponent,
